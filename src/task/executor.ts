@@ -15,6 +15,7 @@ import resolver from "../steps/resolver";
 import {
   calcMD5,
   Cmp,
+  formatUrl,
   getCleanTaskName,
   log,
   parseBuiltInValue,
@@ -66,7 +67,8 @@ export async function execute(
   const downloadCache = config.DEBUG_MODE
     ? DOWNLOAD_CACHE
     : DOWNLOAD_SERVE_CACHE;
-  const hash = calcMD5(dRes.val.directLink);
+  const downloadUrl = formatUrl(dRes.val.directLink);
+  const hash = calcMD5(downloadUrl);
   if (config.ENABLE_CACHE && !fs.existsSync(downloadCache)) {
     shell.mkdir("-p", downloadCache);
   }
@@ -85,20 +87,15 @@ export async function execute(
     // 下载文件
     shell.mkdir(workshop);
     try {
-      downloadedFile = await download(
-        t.task.name,
-        dRes.val.directLink,
-        workshop,
-        {
-          referer: (t.task.scraper_temp as any)?.referer,
-        },
-      );
+      downloadedFile = await download(t.task.name, downloadUrl, workshop, {
+        referer: (t.task.scraper_temp as any)?.referer,
+      });
     } catch (e) {
       if (typeof e == "string") log(e);
       else {
         console.log(JSON.stringify(e));
       }
-      return new Err(`Error:Can't download link : ${dRes.val.directLink}`);
+      return new Err(`Error:Can't download link : ${downloadUrl}`);
     }
     // 缓存下载
     if (config.ENABLE_CACHE) {

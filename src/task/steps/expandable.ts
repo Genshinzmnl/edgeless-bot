@@ -5,7 +5,7 @@ import path from "path";
 import { getBLAKE3 } from "../../utils/checksum";
 import fs from "fs";
 import { NepWorkflow } from "../../types/nep";
-import { tomlStringify } from "../../utils";
+import { formatUrl, tomlStringify } from "../../utils";
 
 // 根据原 ready 目录生成一个可展开包版本的新 ready 目录
 // 返回新 ready 目录，如果返回 null 表示不支持生成可展开包版本
@@ -56,7 +56,7 @@ export async function produceExpandableReady(
   const expandWorkflow: NepWorkflow = {
     download_bin: {
       step: "Download",
-      url: t.info.downloadLink,
+      url: formatUrl(t.info.downloadLink),
       hash_blake3,
       to: at.slice(prefix.length),
     },

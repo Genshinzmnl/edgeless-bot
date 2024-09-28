@@ -565,3 +565,7 @@ export function calcMD5(text: string) {
 export function getCleanTaskName(raw: string) {
   return raw.includes("_") ? raw.split("_")[0] : raw;
 }
+
+export function formatUrl(rawUrl: string) {
+  return rawUrl.startsWith("//") ? `https:${rawUrl}` : rawUrl;
+}
