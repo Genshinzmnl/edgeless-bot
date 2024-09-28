@@ -1,5 +1,5 @@
 import shell from "shelljs";
-import { log, sleep } from "./utils";
+import { getCleanTaskName, log, sleep } from "./utils";
 import scraper from "./steps/scraper";
 import Piscina from "piscina";
 import { executeTasks } from "./task";
@@ -16,6 +16,7 @@ import {
   writeDatabase,
 } from "./utils/database";
 import { login, uploadToRemote } from "./cli/cloud189";
+import { uploadToRemote as rcloneUploadToRemote } from "./cli/rclone";
 import art from "./utils/art";
 import fs from "fs";
 import cp from "child_process";
@@ -28,6 +29,9 @@ import {
   removeExtraBuilds,
   reserveTask,
 } from "./task/utils";
+import path from "path";
+import { copyFile, mkdir } from "node:fs/promises";
+import { existsSync } from "node:fs";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -113,24 +117,39 @@ async function main(): Promise<boolean> {
     if (node.result.ok) {
       const task = getSingleTask(node.taskName).unwrap();
       const fileNames = node.result.val;
+      const metaNames = fileNames.map((n) => `${n}.meta`);
       // 上传
-      if (
-        uploadToRemote(
-          fileNames.reduce((prev, cur) => {
-            prev.push(cur);
-            prev.push(`${cur}.meta`);
-            return prev;
-          }, [] as string[]),
-          task.scope,
-          task.name,
-        )
-      ) {
+      if (uploadToRemote(fileNames.concat(metaNames), task.scope, task.name)) {
         // 去重
         const newBuilds = removeExtraBuilds(
           node.taskName,
           task.scope,
           fileNames,
         );
+        // 复制 meta 文件并上传
+        const cleanTaskName = getCleanTaskName(node.taskName);
+        const sourcePath = path.join(
+          config.DIR_BUILDS,
+          task.scope,
+          cleanTaskName,
+        );
+        const metaLocalPath = path.join(
+          config.DIR_META,
+          task.scope,
+          cleanTaskName,
+        );
+        if (!existsSync(metaLocalPath)) {
+          await mkdir(metaLocalPath, { recursive: true });
+        }
+        for (const name of metaNames) {
+          await copyFile(
+            path.join(sourcePath, name),
+            path.join(metaLocalPath, name),
+          );
+          // 尽力而为上传，忽略失败
+          rcloneUploadToRemote(name, task.scope, cleanTaskName);
+        }
+
         setDatabaseNodeSuccess(node.taskName, newBuilds, fileNames);
       } else {
         setDatabaseNodeFailure(node.taskName, "Error:Can't upload target file");

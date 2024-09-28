@@ -159,6 +159,7 @@ export interface CONFIG {
   DIR_TASKS: string;
   DIR_WORKSHOP: string;
   DIR_BUILDS: string;
+  DIR_META: string;
 
   MAX_BUILDS: number;
   MAX_RETRY_SCRAPER: number;

@@ -22,11 +22,20 @@ function getOptions(timeout: number): cp.ExecSyncOptionsWithBufferEncoding {
 function uploadToRemote(
   fileName: string,
   scope: string,
-  taskName: string,
+  cleanTaskName: string,
 ): boolean {
   if (config.REMOTE_ENABLE) {
-    const localPath = path.join(config.DIR_BUILDS, scope, taskName, fileName);
-    const remotePath = path.join(config.REMOTE_RCLONE_PATH, scope, taskName);
+    const localPath = path.join(
+      config.DIR_BUILDS,
+      scope,
+      cleanTaskName,
+      fileName,
+    );
+    const remotePath = path.join(
+      config.REMOTE_RCLONE_PATH,
+      scope,
+      cleanTaskName,
+    );
     let date = new Date();
     const startTime = date.getTime();
 
@@ -46,7 +55,7 @@ function uploadToRemote(
       );
       // 尝试删除传了一半的文件
       log("Info:Trying to delete broken uploaded file");
-      if (!deleteFromRemote(fileName, scope, taskName, true)) {
+      if (!deleteFromRemote(fileName, scope, cleanTaskName, true)) {
         log("Warning:Fail to delete broken uploaded file");
       } else {
         log("Info:Deleted broken uploaded file");
@@ -70,11 +79,15 @@ function uploadToRemote(
 function deleteFromRemote(
   fileName: string,
   scope: string,
-  taskName: string,
+  cleanTaskName: string,
   ignoreNotExist?: boolean,
 ): boolean {
   if (config.REMOTE_ENABLE) {
-    const remoteDir = path.join(config.REMOTE_RCLONE_PATH, scope, taskName);
+    const remoteDir = path.join(
+      config.REMOTE_RCLONE_PATH,
+      scope,
+      cleanTaskName,
+    );
     const remotePath = path.join(remoteDir, fileName);
     // 读取远程目录查看是否存在
     let buf;

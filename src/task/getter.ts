@@ -8,7 +8,13 @@ import { VALID_FLAGS } from "../const";
 import { reserveTask, validateConfig } from "./utils";
 import { log } from "../utils";
 
+const taskCache = new Map<string, TaskInstance>();
+
 export function getSingleTask(taskName: string): Result<TaskInstance, string> {
+  const c = taskCache.get(taskName);
+  if (c) {
+    return new Ok(c);
+  }
   const taskConfigFile = path.resolve(
     process.cwd(),
     config.DIR_TASKS,
@@ -62,6 +68,7 @@ export function getSingleTask(taskName: string): Result<TaskInstance, string> {
       res["category"] = json.task.category;
       res["pageUrl"] = json.task.url;
       res["license"] = json.task.license;
+      taskCache.set(taskName, res);
       return new Ok(res);
     }
   }

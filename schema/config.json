@@ -11,10 +11,13 @@
     "REMOTE_ENABLE": {
       "type": "boolean"
     },
-    "REMOTE_NAME": {
+    "REMOTE_RCLONE_NAME": {
       "type": "string"
     },
-    "REMOTE_PATH": {
+    "REMOTE_RCLONE_PATH": {
+      "type": "string"
+    },
+    "REMOTE_CLOUD189_PATH": {
       "type": "string"
     },
     "DIR_TASKS": {
@@ -24,6 +27,9 @@
       "type": "string"
     },
     "DIR_BUILDS": {
+      "type": "string"
+    },
+    "DIR_META": {
       "type": "string"
     },
     "MAX_BUILDS": {
@@ -65,11 +71,13 @@
     "DATABASE_UPDATE",
     "DATABASE_PATH",
     "REMOTE_ENABLE",
-    "REMOTE_NAME",
-    "REMOTE_PATH",
+    "REMOTE_RCLONE_NAME",
+    "REMOTE_RCLONE_PATH",
+    "REMOTE_CLOUD189_PATH",
     "DIR_TASKS",
     "DIR_WORKSHOP",
     "DIR_BUILDS",
+    "DIR_META",
     "MAX_BUILDS",
     "MAX_RETRY_SCRAPER",
     "MAX_RETRY_RESOLVER",

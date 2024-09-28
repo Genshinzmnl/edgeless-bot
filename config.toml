@@ -8,7 +8,7 @@ REMOTE_ENABLE = true
 # 远程存储的rclone名称
 REMOTE_RCLONE_NAME = "kanuo"
 # 远程存储路径
-REMOTE_RCLONE_NAME = "/www/wwwroot/registry.edgeless.top/meta"
+REMOTE_RCLONE_PATH = "/www/wwwroot/registry.edgeless.top/meta"
 REMOTE_CLOUD189_PATH = "/我的备份/NepBuild"
 
 # 任务存储路径
@@ -17,6 +17,8 @@ DIR_TASKS = "./tasks"
 DIR_WORKSHOP = "./workshop"
 # 构建存储路径
 DIR_BUILDS = "./builds"
+# 元信息的存储路径
+DIR_META = "./meta"
 
 # 允许同时存在的最大构建数量
 MAX_BUILDS = 1

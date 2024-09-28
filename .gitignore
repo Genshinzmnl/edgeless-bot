@@ -1,8 +1,9 @@
 .idea
 node_modules
 test
-workshop
-builds
+/workshop
+/builds
+/meta
 dist
 docs/docs-dist
 tasks/1
