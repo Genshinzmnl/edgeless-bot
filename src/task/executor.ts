@@ -120,12 +120,12 @@ export async function execute(
       `Error:Can't validate downloaded file ${downloadedFile} : expect hash ${t.info.validation.value}`,
     );
   }
-  // 文件应不小于给定的阈值（缺省512KB）
+  // 文件应不小于给定的阈值（缺省256KB）
   const minSize = parseFileSize(t.task.parameter.min_download_size).unwrap();
   if (fs.statSync(absolutePath).size < minSize) {
     return new Err(
       `Error:Can't validate downloaded file ${downloadedFile} : file size less than ${
-        t.task.parameter.min_download_size ?? "512KB"
+        t.task.parameter.min_download_size ?? "256KB"
       }`,
     );
   }

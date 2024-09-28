@@ -520,7 +520,7 @@ export function coverSecret(secret: string) {
   return c1 + c2;
 }
 
-export function parseFileSize(str: string = "512KB"): Result<number, string> {
+export function parseFileSize(str: string = "256KB"): Result<number, string> {
   if (!str) {
     return new Err(
       `Error:Failed to parse '${str}' as valid file size : empty string provided, e.g. '512KB'`,
