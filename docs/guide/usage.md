@@ -88,14 +88,8 @@ MAX_RETRY_SCRAPER = 3
 # 允许的最大解析器重试次数
 MAX_RETRY_RESOLVER = 1
 
-# 是否启动aria2c
-ARIA2_SPAWN = true
-# aria2c rpc监听端口
-ARIA2_PORT = 16800
-# aria2c密钥
-#ARIA2_SECRET = "edgeless"
 # 最大下载线程数
-ARIA2_THREAD = 4
+DOWNLOAD_THREAD = 4
 # 全局网络代理
 #GLOBAL_PROXY = "http://localhost:8888"
 

@@ -169,7 +169,7 @@ export interface CONFIG {
   ARIA2_SPAWN: boolean;
   ARIA2_PORT: number;
   ARIA2_SECRET?: string;
-  ARIA2_THREAD: number;
+  DOWNLOAD_THREAD: number;
 
   SPECIFY_TASK: string;
   MODE_FORCED: boolean;

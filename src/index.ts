@@ -6,7 +6,6 @@ import { executeTasks } from "./task";
 import { config } from "./config";
 import { ensurePlatform } from "./utils/platform";
 import { clearWorkshop } from "./utils/workshop";
-import { initAria2c, stopAria2c } from "./cli/aria2c";
 import {
   modified,
   readDatabase,
@@ -79,11 +78,6 @@ async function main(): Promise<boolean> {
   // 重建工作目录
   if (!clearWorkshop()) {
     log(`Error:Can't keep workshop clear : ${config.DIR_WORKSHOP}`);
-    return false;
-  }
-  // 启动aria2c
-  if (!(await initAria2c())) {
-    log("Error:Can't initiate aria2c");
     return false;
   }
   // 读取数据库
@@ -161,9 +155,6 @@ async function main(): Promise<boolean> {
 
   // 保存数据库
   writeDatabase();
-  // 停止aria2c
-  await stopAria2c();
-  log("Info:Aria2c exited");
 
   // 打印报告
   if (config.GITHUB_ACTIONS) {
