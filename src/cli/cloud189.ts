@@ -110,9 +110,7 @@ export function deleteFromRemote(
       buf = cp.execSync(`cloud189 ls ${remoteDir}`);
     } catch (err: unknown) {
       console.log((err as ExecSyncError)?.output.toString());
-      log(
-        `Error:Remote directory not exist:${config.REMOTE_NAME}:${remoteDir}`,
-      );
+      log(`Error:Remote directory not exist:cloud189:${remoteDir}`);
       return false;
     }
     // log(`Info:Debug - run deleteFromRemote with remotePath=${remotePath};\n gbk(buf)=${gbk(buf)},\n buf.toString()=${buf.toString()}`)
@@ -121,9 +119,7 @@ export function deleteFromRemote(
       !buf.toString().includes(fileName) &&
       (ignoreNotExist == undefined || !ignoreNotExist)
     ) {
-      log(
-        `Warning:Remote not exist file : ${config.REMOTE_NAME}:${remotePath} ,ignore`,
-      );
+      log(`Warning:Remote not exist file : cloud189:${remotePath} ,ignore`);
       return true;
     }
 
