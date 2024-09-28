@@ -26,7 +26,7 @@ import {
 } from "../utils";
 import fs from "fs";
 import shell from "shelljs";
-import { download } from "../utils/download";
+import { download } from "../cli/aria2c";
 import checksum from "../utils/checksum";
 import { getExeVersion } from "./utils";
 import producer from "../steps/producer";
@@ -87,8 +87,7 @@ export async function execute(
     // 下载文件
     shell.mkdir(workshop);
     try {
-      log(`Info:Start download for task '${t.task.name}', url: ${downloadUrl}`);
-      downloadedFile = await download(downloadUrl, workshop, {
+      downloadedFile = await download(t.task.name, downloadUrl, workshop, {
         referer: (t.task.scraper_temp as any)?.referer,
       });
     } catch (e) {

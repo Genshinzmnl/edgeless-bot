@@ -11,7 +11,7 @@ export type OS = "Windows" | "Linux" | "MacOS" | "Other";
 
 export type Commands =
   | "p7zip"
-  // | "aria2c"
+  | "aria2c"
   | "rclone"
   | "pecmd"
   | "cloud189"
@@ -59,14 +59,14 @@ export function where(command: Commands): Result<string, string> {
         `${process.env.PROGRAMFILESW6432}/7-Zip/7z`,
       ];
       break;
-    // case "aria2c":
-    //   possibleCommands = ["aria2c"];
-    //   possiblePositions = [
-    //     "./aria2c",
-    //     "./bin/aria2c",
-    //     path.join(os.homedir(), "scoop/apps/aria2/current/aria2c"),
-    //   ];
-    //   break;
+    case "aria2c":
+      possibleCommands = ["aria2c"];
+      possiblePositions = [
+        "./aria2c",
+        "./bin/aria2c",
+        path.join(os.homedir(), "scoop/apps/aria2/current/aria2c"),
+      ];
+      break;
     case "rclone":
       possibleCommands = ["rclone"];
       possiblePositions = [
@@ -147,12 +147,7 @@ export function where(command: Commands): Result<string, string> {
 }
 
 export function ensurePlatform(alert = true): "Full" | "POSIX" | "Unavailable" {
-  const list: Commands[] = [
-    // "aria2c",
-    "p7zip",
-    "ept",
-    "curl",
-  ];
+  const list: Commands[] = ["aria2c", "p7zip", "ept", "curl"];
   let suc: "Full" | "POSIX" | "Unavailable" = "Full";
   if (config.REMOTE_ENABLE) {
     list.push("cloud189");

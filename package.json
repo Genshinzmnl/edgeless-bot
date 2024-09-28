@@ -3,13 +3,11 @@
     "@iarna/toml": "^2.2.5",
     "ajv": "^8.8.2",
     "axios": "^1.6.5",
-    "blake3": "^3",
     "chalk": "^4.1.1",
     "checksum": "^1.0.0",
     "cheerio": "^1.0.0-rc.10",
     "iconv-lite": "^0.6.3",
     "ini": "^4",
-    "ipull": "^3.7.4",
     "libaria2-ts": "^1.0.91",
     "minimist": "^1.2.5",
     "ora": "8",
@@ -19,7 +17,8 @@
     "toml": "^3.0.0",
     "ts-results": "^3.3.0",
     "tslib": "^2.4.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "blake3": "^3"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",
@@ -37,10 +36,12 @@
   },
   "devDependencies": {
     "@types/checksum": "^0.1.33",
+    "@types/iconv-lite": "^0.0.1",
     "@types/ini": "^4",
     "@types/json-schema": "^7.0.12",
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.17.1",
+    "@types/prettier": "^3",
     "@types/shelljs": "^0.8.10",
     "@typescript-eslint/eslint-plugin": "^8.4.0",
     "@typescript-eslint/parser": "^8.4.0",
@@ -65,6 +66,5 @@
   "resolutions": {
     "blake3-wasm": "^3.0.0",
     "@c4312/blake3-internal": "^3.0.0"
-  },
-  "packageManager": "pnpm@9.11.0"
+  }
 }

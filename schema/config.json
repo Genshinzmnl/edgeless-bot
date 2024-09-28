@@ -61,7 +61,7 @@
     "GLOBAL_PROXY": {
       "type": "string"
     },
-    "DOWNLOAD_THREAD": {
+    "ARIA2_THREAD": {
       "type": "integer",
       "maximum": 16,
       "minimum": 1
