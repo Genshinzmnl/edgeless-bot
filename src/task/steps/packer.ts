@@ -68,7 +68,7 @@ export async function packer(
   }
 
   // 生成 meta
-  const metaTarget = path.resolve(localStorageDir, fileName + ".meta");
+  const metaTarget = path.resolve(localStorageDir, `${fileName}.meta`);
   if (!(await genMeta(target, metaTarget))) {
     return new Err("Error:Generating meta failed");
   }

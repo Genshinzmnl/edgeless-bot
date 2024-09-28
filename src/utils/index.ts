@@ -26,9 +26,9 @@ export function print(text: unknown, ga_mode: boolean, badge?: string) {
   // 增加字符串类型判断
   if (typeof text !== "string") {
     console.log(
-      (badge ? badge + " " : "") +
-        chalk.yellow("Warning ") +
-        "Illegal type detected",
+      `${
+        (badge ? `${badge} ` : "") + chalk.yellow("Warning ")
+      }Illegal type detected`,
     );
     console.log(JSON.stringify(text));
     return;
@@ -37,9 +37,9 @@ export function print(text: unknown, ga_mode: boolean, badge?: string) {
   const spl = text.split(":");
   if (spl.length < 2) {
     console.log(
-      (badge ? badge + " " : "") +
-        chalk.yellow("Warning ") +
-        "Illegal message detected",
+      `${
+        (badge ? `${badge} ` : "") + chalk.yellow("Warning ")
+      }Illegal message detected`,
     );
     console.log(text);
     return;
@@ -49,50 +49,50 @@ export function print(text: unknown, ga_mode: boolean, badge?: string) {
   switch (spl[0]) {
     case "Info":
       if (ga_mode) {
-        console.log((badge ? badge + " " : "") + chalk.blue("Info: ") + inf);
+        console.log((badge ? `${badge} ` : "") + chalk.blue("Info: ") + inf);
       } else {
-        console.log((badge ? badge + " " : "") + chalk.blue("Info ") + inf);
+        console.log((badge ? `${badge} ` : "") + chalk.blue("Info ") + inf);
       }
 
       break;
     case "Success":
       if (ga_mode) {
         console.log(
-          (badge ? badge + " " : "") + chalk.greenBright("Success: ") + inf,
+          (badge ? `${badge} ` : "") + chalk.greenBright("Success: ") + inf,
         );
       } else {
         console.log(
-          (badge ? badge + " " : "") + chalk.greenBright("Success ") + inf,
+          (badge ? `${badge} ` : "") + chalk.greenBright("Success ") + inf,
         );
       }
 
       break;
     case "Warning":
       if (ga_mode) {
-        console.log("::warning::" + inf);
+        console.log(`::warning::${inf}`);
       } else {
         console.log(
-          (badge ? badge + " " : "") + chalk.yellow("Warning ") + inf,
+          (badge ? `${badge} ` : "") + chalk.yellow("Warning ") + inf,
         );
       }
 
       break;
     case "Error":
       if (ga_mode) {
-        console.log("::error::" + inf);
+        console.log(`::error::${inf}`);
       } else {
-        console.log((badge ? badge + " " : "") + chalk.red("Error ") + inf);
+        console.log((badge ? `${badge} ` : "") + chalk.red("Error ") + inf);
       }
 
       break;
     default:
       if (ga_mode) {
-        console.log("::warning::Illegal message detected:" + inf);
+        console.log(`::warning::Illegal message detected:${inf}`);
       } else {
         console.log(
-          (badge ? badge + " " : "") +
-            chalk.yellow("Warning ") +
-            "Illegal message detected",
+          `${
+            (badge ? `${badge} ` : "") + chalk.yellow("Warning ")
+          }Illegal message detected`,
         );
         console.log(text);
       }
@@ -112,7 +112,7 @@ export function log(text: string, b?: string) {
   }
   print(text, false, d);
   if (!text.startsWith("Info:")) {
-    fs.appendFileSync("bot.log", text + "\n");
+    fs.appendFileSync("bot.log", `${text}\n`);
   }
 }
 
@@ -166,13 +166,13 @@ export function isURL(str_url: string): boolean {
 
 export function getSizeString(size: number): string {
   if (size < 1024) {
-    return size.toFixed(2) + "B";
+    return `${size.toFixed(2)}B`;
   } else if (size < 1024 * 1024) {
-    return (size / 1024).toFixed(2) + "KB";
+    return `${(size / 1024).toFixed(2)}KB`;
   } else if (size < 1024 * 1024 * 1024) {
-    return (size / (1024 * 1024)).toFixed(2) + "MB";
+    return `${(size / (1024 * 1024)).toFixed(2)}MB`;
   } else {
-    return (size / (1024 * 1024 * 1024)).toFixed(2) + "GB";
+    return `${(size / (1024 * 1024 * 1024)).toFixed(2)}GB`;
   }
 }
 
@@ -258,7 +258,7 @@ export function getValidator(
 ): Result<ValidateFunction<unknown>, string> {
   if (!ajvCache[name]) {
     // 读取schema文件
-    const schemaFilePath = path.join("./schema", name + ".json");
+    const schemaFilePath = path.join("./schema", `${name}.json`);
     if (!fs.existsSync(schemaFilePath)) {
       return new Err(`Error:Specified schema not found : ${schemaFilePath}`);
     }
@@ -286,7 +286,7 @@ export function schemaValidator(
     return new Ok(true);
   } else {
     validate.errors?.forEach((item) => {
-      log(`Error:At ${root ?? "" + item.instancePath} : ${item.message}`);
+      log(`Error:At ${root ?? `${item.instancePath}`} : ${item.message}`);
     });
     return new Ok(false);
   }
@@ -499,7 +499,7 @@ export async function pressEnter(interval: number[]) {
     script += `WAIT ${i}000\nSEND VK_RETURN\n`;
   }
   // 写脚本
-  const p = PROJECT_ROOT + "/_press.wcs";
+  const p = `${PROJECT_ROOT}/_press.wcs`;
   fs.writeFileSync(p, script);
   // 执行
   cp.execSync(`${wherePECMD().unwrap()} _press.wcs`, { cwd: PROJECT_ROOT });

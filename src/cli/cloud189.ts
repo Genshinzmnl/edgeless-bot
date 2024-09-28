@@ -111,10 +111,7 @@ export function deleteFromRemote(
     } catch (err: unknown) {
       console.log((err as ExecSyncError)?.output.toString());
       log(
-        "Error:Remote directory not exist:" +
-          config.REMOTE_NAME +
-          ":" +
-          remoteDir,
+        `Error:Remote directory not exist:${config.REMOTE_NAME}:${remoteDir}`,
       );
       return false;
     }
@@ -125,18 +122,14 @@ export function deleteFromRemote(
       (ignoreNotExist == undefined || !ignoreNotExist)
     ) {
       log(
-        "Warning:Remote not exist file : " +
-          config.REMOTE_NAME +
-          ":" +
-          remotePath +
-          " ,ignore",
+        `Warning:Remote not exist file : ${config.REMOTE_NAME}:${remotePath} ,ignore`,
       );
       return true;
     }
 
     // 尝试删除
     try {
-      log("Info:Removing " + remotePath);
+      log(`Info:Removing ${remotePath}`);
       cp.execSync(`cloud189 rm "${remotePath}"`);
     } catch (err: unknown) {
       console.log((err as ExecSyncError)?.output.toString());

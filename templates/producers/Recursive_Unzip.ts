@@ -64,7 +64,7 @@ export default async function (
     }
     // 判断是文件夹还是文件
     if (fs.statSync(path.join(cwd, file)).isDirectory()) {
-      cwd = cwd + "/" + file;
+      cwd = `${cwd}/${file}`;
     } else {
       // 尝试解压
       success = await release(file, level.toString(), true, cwd);
@@ -139,7 +139,7 @@ export default async function (
   };
   if (
     exist(path.join("workflows", "setup.toml")) &&
-    exist(p.taskName + "/" + obj.sourceFile)
+    exist(`${p.taskName}/${obj.sourceFile}`)
   ) {
     return new Ok({
       readyRelativePath: "_ready",

@@ -29,7 +29,7 @@ export default async function (
     removePath = path.join(workflow, "remove.toml"),
     fileDir = path.join(readyPath, taskName);
   shell.mkdir("-p", fileDir);
-  shell.cp(path.join(workshop, downloadedFile), fileDir + "/");
+  shell.cp(path.join(workshop, downloadedFile), `${fileDir}/`);
 
   shell.mkdir("-p", workflow);
 

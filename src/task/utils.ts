@@ -70,19 +70,19 @@ export function removeExtraBuilds(
       for (const fileName of target.fileNames) {
         const absolutePath = path.resolve(repo, fileName);
         if (!config.GITHUB_ACTIONS && fs.existsSync(absolutePath)) {
-          log("Info:Remove local extra build " + absolutePath);
+          log(`Info:Remove local extra build ${absolutePath}`);
           try {
             shell.rm(absolutePath);
             if (fs.existsSync(absolutePath)) {
-              log("Warning:Fail to delete local extra build " + fileName);
+              log(`Warning:Fail to delete local extra build ${fileName}`);
             }
           } catch {
-            log("Warning:Fail to delete local extra build " + fileName);
+            log(`Warning:Fail to delete local extra build ${fileName}`);
           }
         }
 
         if (!deleteFromRemote(fileName, scope, taskName)) {
-          log("Warning:Fail to delete remote extra build " + fileName);
+          log(`Warning:Fail to delete remote extra build ${fileName}`);
           failure.push(target);
         }
       }
@@ -101,9 +101,10 @@ export async function getExeVersion(
     if (!fs.existsSync(path.resolve(cd, file))) {
       resolve(
         new Err(
-          "Error:Can't find " +
-            path.resolve(cd, file) +
-            ' , please consider add "${taskName}/" before it',
+          `Error:Can't find ${path.resolve(
+            cd,
+            file,
+          )} , please consider add "\${taskName}/" before it`,
         ),
       );
     }
@@ -119,7 +120,7 @@ export async function getExeVersion(
           console.log(JSON.stringify(error, null, 2));
           resolve(
             new Err(
-              "Error:Can't get file version of " + path.resolve(cd, file),
+              `Error:Can't get file version of ${path.resolve(cd, file)}`,
             ),
           );
         } else {
@@ -202,7 +203,7 @@ export function validateConfig(task: TaskConfig): boolean {
         path.resolve(
           "./schema",
           "producer_templates",
-          task.template.producer + ".json",
+          `${task.template.producer}.json`,
         ),
       )
     ) {
@@ -214,7 +215,7 @@ export function validateConfig(task: TaskConfig): boolean {
     // producer_required检查
     suc = schemaValidator(
       task.producer_required,
-      "producer_templates/" + task.template.producer,
+      `producer_templates/${task.template.producer}`,
       "/producer_required",
     ).unwrap();
   }
@@ -296,7 +297,7 @@ export function getTasksToBeExecuted(results: ResultNode[]): Array<{
     if (matchRes.err) {
       setDatabaseNodeFailure(
         result.taskName,
-        "Error:Can't parse version returned by scraper : " + newNode.version,
+        `Error:Can't parse version returned by scraper : ${newNode.version}`,
       );
       continue;
     }
@@ -323,14 +324,14 @@ export function getTasksToBeExecuted(results: ResultNode[]): Array<{
             `Warning:Local version(${db.recent.latestVersion}) greater than online version(${onlineVersion})`,
           );
         } else {
-          log(`Info:Ignore missing version task ` + result.taskName);
+          log(`Info:Ignore missing version task ${result.taskName}`);
         }
         if (res.err) {
           log(res.val);
           break;
         }
         if (config.MODE_FORCED) {
-          log("Warning:Forced rebuild " + result.taskName);
+          log(`Warning:Forced rebuild ${result.taskName}`);
           makeList.push({
             task: res.val,
             info: newNode,
@@ -343,7 +344,7 @@ export function getTasksToBeExecuted(results: ResultNode[]): Array<{
           break;
         }
         if (config.MODE_FORCED) {
-          log("Warning:Forced rebuild " + result.taskName);
+          log(`Warning:Forced rebuild ${result.taskName}`);
           makeList.push({
             task: res.val,
             info: newNode,

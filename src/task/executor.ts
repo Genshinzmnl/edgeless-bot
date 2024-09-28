@@ -98,7 +98,7 @@ export async function execute(
       else {
         console.log(JSON.stringify(e));
       }
-      return new Err("Error:Can't download link : " + dRes.val.directLink);
+      return new Err(`Error:Can't download link : ${dRes.val.directLink}`);
     }
     // 缓存下载
     if (config.ENABLE_CACHE) {
@@ -186,7 +186,7 @@ export async function execute(
     t.task.name,
     p.val.readyRelativePath,
   );
-  if (!config.GITHUB_ACTIONS) log("Info:Receive ready directory " + target);
+  if (!config.GITHUB_ACTIONS) log(`Info:Receive ready directory ${target}`);
   // 实现 delete 与 cover
   let f: string, v;
   if (t.task.parameter.build_delete) {
@@ -233,7 +233,7 @@ export async function execute(
           }
         }
         // 覆盖拷贝文件
-        shell.cp("-r", f + "/*", target);
+        shell.cp("-r", `${f}/*`, target);
         // 替换插入原工作流标记，并替换内置变量
         if (hasCoverNames.length) {
           for (const name of hasCoverNames) {
@@ -259,7 +259,7 @@ export async function execute(
   } else {
     // 检查是否可能忘加了
     const p = path.resolve(config.DIR_TASKS, t.task.name, "cover");
-    if (fs.existsSync(p) || fs.existsSync(p + ".7z")) {
+    if (fs.existsSync(p) || fs.existsSync(`${p}.7z`)) {
       log(
         "Warning:Exist cover folder/file but parameter.build_cover not specified",
       );
@@ -307,7 +307,7 @@ export async function execute(
           `Info:Missing version task ${t.task.name} has no upstream updated release`,
         );
         if (config.MODE_FORCED) {
-          log("Warning:Forced rebuild " + t.task.name);
+          log(`Warning:Forced rebuild ${t.task.name}`);
         } else {
           // 阻止继续，直接返回成功
           ctn = false;
@@ -322,7 +322,7 @@ export async function execute(
           `Warning:Missing version task ${t.task.name}'s local version(${db.recent.latestVersion}) greater than online version(${version})`,
         );
         if (config.MODE_FORCED) {
-          log("Warning:Forced rebuild " + t.task.name);
+          log(`Warning:Forced rebuild ${t.task.name}`);
         } else {
           ctn = false;
         }

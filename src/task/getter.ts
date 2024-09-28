@@ -16,7 +16,7 @@ export function getSingleTask(taskName: string): Result<TaskInstance, string> {
     "config.toml",
   );
   if (!fs.existsSync(path.resolve(taskConfigFile))) {
-    return new Err("Error:Can't find config.toml for " + taskName);
+    return new Err(`Error:Can't find config.toml for ${taskName}`);
   } else {
     const text = fs.readFileSync(taskConfigFile).toString();
     let json;
@@ -24,7 +24,7 @@ export function getSingleTask(taskName: string): Result<TaskInstance, string> {
       json = toml.parse(text) as TaskConfig;
     } catch (e) {
       console.log(JSON.stringify(e));
-      return new Err("Error:Can't parse config.toml for " + taskName);
+      return new Err(`Error:Can't parse config.toml for ${taskName}`);
     }
     if (taskName != json.task.name) {
       return new Err(
@@ -50,7 +50,7 @@ export function getSingleTask(taskName: string): Result<TaskInstance, string> {
       }
     }
     if (!validateConfig(json)) {
-      return new Err("Error:Can't validate config.toml for " + taskName);
+      return new Err(`Error:Can't validate config.toml for ${taskName}`);
     } else {
       const res = json as unknown as TaskInstance;
       res["name"] = json.task.name;
@@ -70,7 +70,7 @@ export function getSingleTask(taskName: string): Result<TaskInstance, string> {
 export function getAllTasks(): Result<Array<TaskInstance>, string> {
   const tasksDir = path.resolve(process.cwd(), config.DIR_TASKS);
   if (!fs.existsSync(tasksDir)) {
-    return new Err("Error:Task directory not exist : " + tasksDir);
+    return new Err(`Error:Task directory not exist : ${tasksDir}`);
   }
   const dirList = fs.readdirSync(tasksDir),
     result = [];

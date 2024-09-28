@@ -156,7 +156,7 @@ async function download_with_aria2c(
   return new Promise(async (resolve, reject) => {
     // 处理以 // 开头的链接
     if (url.slice(0, 2) == "//") {
-      url = "https:" + url;
+      url = `https:${url}`;
     }
     log(`Info:Get download address : ${url}`);
     let filename = "";
@@ -211,7 +211,7 @@ async function download_with_aria2c(
             etc = Number(status.totalLength) / avgSpeed, // 单位ms
             etcString = getTimeString(etc);
           const d = new Date(startTime + etc),
-            endString = d.getHours() + ":" + d.getMinutes();
+            endString = `${d.getHours()}:${d.getMinutes()}`;
           if (avgSpeed < 524) {
             log(
               `Warning:${taskName} downloading slowly @ ${getSizeString(

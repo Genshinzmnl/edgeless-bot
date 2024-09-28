@@ -6,8 +6,7 @@ import { robustGet } from "../../src/utils/network";
 import { log } from "../../src/utils";
 import { ScoopAppManifestSchema } from "./ScoopTypes";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-empty-interface, @typescript-eslint/no-empty-object-type, @typescript-eslint/no-unused-vars
 interface Temp {}
 
 export default async function (

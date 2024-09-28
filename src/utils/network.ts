@@ -36,7 +36,7 @@ async function singleFetch(
     res = await axios.get(url, getConfig(axiosConfig));
   } catch (err) {
     // console.log(JSON.stringify(err));
-    return new Err("Warning:Single fetch failed for " + url);
+    return new Err(`Warning:Single fetch failed for ${url} : ${err}`);
   }
   return new Ok(res.data);
 }
@@ -82,10 +82,7 @@ async function fetchURL(url: string): Promise<Result<string, string>> {
         // console.log(e.response?.status)
         resolve(
           new Err(
-            "Warning:Single fetch failed for " +
-              url +
-              " :\n" +
-              JSON.stringify(e),
+            `Warning:Single fetch failed for ${url} :\n${JSON.stringify(e)}`,
           ),
         );
       }

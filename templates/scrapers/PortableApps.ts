@@ -18,7 +18,7 @@ const DEBUG = false;
 function parseDownloadUrl(href: string): string {
   // 识别根目录字符“/”
   if (href[0] === "/") {
-    href = "https://portableapps.com" + href;
+    href = `https://portableapps.com${href}`;
   }
 
   // 识别downloading，替换为redirect
@@ -130,10 +130,7 @@ async function scrapePage(
 
               if (DEBUG)
                 log(
-                  "Info:Found simplified chinese version\nsha256:" +
-                    result.sha256 +
-                    "\ndownload link:" +
-                    result.href,
+                  `Info:Found simplified chinese version\nsha256:${result.sha256}\ndownload link:${result.href}`,
                 );
             } else {
               if (DEBUG) {

@@ -74,7 +74,7 @@ async function main(): Promise<boolean> {
   }
   // 重建工作目录
   if (!clearWorkshop()) {
-    log("Error:Can't keep workshop clear : " + config.DIR_WORKSHOP);
+    log(`Error:Can't keep workshop clear : ${config.DIR_WORKSHOP}`);
     return false;
   }
   // 启动aria2c
@@ -118,7 +118,7 @@ async function main(): Promise<boolean> {
         uploadToRemote(
           fileNames.reduce((prev, cur) => {
             prev.push(cur);
-            prev.push(cur + ".meta");
+            prev.push(`${cur}.meta`);
             return prev;
           }, [] as string[]),
           task.scope,

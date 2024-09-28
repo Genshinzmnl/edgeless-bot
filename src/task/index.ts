@@ -21,7 +21,7 @@ export async function executeTasks(
       requireWindowsTasks: Array<ExecuteParameter> = [];
     ts.forEach((item) => {
       // 生成tip
-      r = r + ` ${item.task.name}`;
+      r = `${r} ${item.task.name}`;
       // 根据是否需要Windows分流
       if (item.task.extra?.require_windows) {
         requireWindowsTasks.push(item);

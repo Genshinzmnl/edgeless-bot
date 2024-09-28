@@ -43,7 +43,7 @@ export default async function (
   };
   if (
     exist(path.join("workflows", "setup.toml")) &&
-    exist(taskName + "/" + downloadedFile)
+    exist(`${taskName}/${downloadedFile}`)
   ) {
     return new Ok({
       readyRelativePath: "ready",

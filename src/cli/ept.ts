@@ -20,9 +20,7 @@ export async function packIntoNep(
         if (fs.existsSync(intoFile)) {
           resolve(true);
         } else {
-          log(
-            "Error:Pack command failed with output:\n" + stdout + "\n" + stderr,
-          );
+          log(`Error:Pack command failed with output:\n${stdout}\n${stderr}`);
           resolve(false);
         }
       },
@@ -46,9 +44,7 @@ export async function genMeta(
         if (fs.existsSync(intoFile)) {
           resolve(true);
         } else {
-          log(
-            "Error:Meta command failed with output:\n" + stdout + "\n" + stderr,
-          );
+          log(`Error:Meta command failed with output:\n${stdout}\n${stderr}`);
           resolve(false);
         }
       },
