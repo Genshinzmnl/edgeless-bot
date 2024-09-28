@@ -49,6 +49,10 @@ scoop install rclone
 brew install rclone
 ```
 
+### cloud189 (选装)
+
+官方仓库 https://github.com/gowsp/cloud189 ，如果需要启用远程功能则需要安装
+
 ### PECMD (自带)
 
 在执行仅 Windows 平台任务时需要使用，已经预置在 GitHub 仓库的 `bin` 文件夹内。
@@ -66,9 +70,9 @@ DATABASE_PATH = "./database.json"
 # 是否启用远程功能
 REMOTE_ENABLE = false
 # 远程存储的rclone名称
-REMOTE_NAME = "pineapple"
+REMOTE_RCLONE_NAME = "pineapple"
 # 远程存储路径
-REMOTE_PATH = "/hdisk/edgeless/插件包"
+REMOTE_CLOUD189_PATH = "/hdisk/edgeless/插件包"
 
 # 任务存储路径
 DIR_TASKS = "./tasks"

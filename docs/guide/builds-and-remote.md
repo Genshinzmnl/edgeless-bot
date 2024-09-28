@@ -12,8 +12,13 @@
 
 ## 远程
 
-远程功能通过调用 [rclone](https://rclone.org/) 命令行实现，因此如果启用远程功能则在运行 Edgeless Bot 之前需要预先在 rclone 中添加远程存储。
+由于 Nep 的后端服务架构较特殊，在构建结束后如果启用了远程功能则会进行以下两个步骤
+* 将 `.nep` 和 `.nep.meta` 文件上传到 cloud189
+* 将 `.nep.meta` 文件上传到 rclone
 
-首先确保你已经[安装 rclone](./usage.md#rclone-选装)，然后在终端中运行命令 `rclone config`，输入 `n` 并回车创建一个新的远程存储。详细步骤见 [rclone 官方教程](https://rclone.org/docs/)。
+因此如果启用远程功能则在运行 Edgeless Bot 之前需要预先安装并配置 rclone 和 cloud189 两个客户端：
 
-创建完成后修改 Edgeless Bot 配置文件，将 `REMOTE_NAME` 改为在 rclone 中配置的存储名称，`REMOTE_PATH` 改为远程的 builds 存放目录。
+* 确保你已经[安装 rclone](./usage.md#rclone-选装)，然后在终端中运行命令 `rclone config`，输入 `n` 并回车创建一个新的远程存储。详细步骤见 [rclone 官方教程](https://rclone.org/docs/)。
+* 确保你已经[安装 rclone](./usage.md#rclone-选装)，然后在终端中运行命令 `cloud189 login`，输入账号密码登录。
+
+创建完成后修改 Edgeless Bot 配置文件，将 `REMOTE_RCLONE_NAME` 改为在 rclone 中配置的存储名称，`REMOTE_RCLONE_PATH` 和 `REMOTE_CLOUD189_PATH` 分别改为对应的远程 meta 和 builds 存放目录。

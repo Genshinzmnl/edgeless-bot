@@ -152,8 +152,9 @@ export interface CONFIG {
   DATABASE_PATH: string;
 
   REMOTE_ENABLE: boolean;
-  REMOTE_NAME: string;
-  REMOTE_PATH: string;
+  REMOTE_RCLONE_NAME: string;
+  REMOTE_RCLONE_PATH: string;
+  REMOTE_CLOUD189_PATH: string;
 
   DIR_TASKS: string;
   DIR_WORKSHOP: string;

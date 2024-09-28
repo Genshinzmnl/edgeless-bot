@@ -49,7 +49,7 @@ export function uploadToRemote(
         fileName,
       );
       const remotePath = path
-        .join(config.REMOTE_PATH, scope, cleanTaskName)
+        .join(config.REMOTE_CLOUD189_PATH, scope, cleanTaskName)
         .replaceAll("\\", "/");
 
       let date = new Date();
@@ -101,7 +101,7 @@ export function deleteFromRemote(
   if (config.REMOTE_ENABLE) {
     const cleanTaskName = getCleanTaskName(taskName);
     const remoteDir = path
-      .join(config.REMOTE_PATH, scope, cleanTaskName)
+      .join(config.REMOTE_CLOUD189_PATH, scope, cleanTaskName)
       .replaceAll("\\", "/");
     const remotePath = path.join(remoteDir, fileName).replaceAll("\\", "/");
     // 读取远程目录查看是否存在

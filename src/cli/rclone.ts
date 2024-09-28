@@ -26,14 +26,14 @@ function uploadToRemote(
 ): boolean {
   if (config.REMOTE_ENABLE) {
     const localPath = path.join(config.DIR_BUILDS, scope, taskName, fileName);
-    const remotePath = path.join(config.REMOTE_PATH, scope, taskName);
+    const remotePath = path.join(config.REMOTE_RCLONE_PATH, scope, taskName);
     let date = new Date();
     const startTime = date.getTime();
 
     try {
       log(`Info:Uploading ${fileName}`);
       cp.execSync(
-        `rclone copy "${localPath}" ${config.REMOTE_NAME}:${remotePath}`,
+        `rclone copy "${localPath}" ${config.REMOTE_RCLONE_NAME}:${remotePath}`,
         getOptions(3600000),
       );
     } catch (err: unknown) {
@@ -74,19 +74,19 @@ function deleteFromRemote(
   ignoreNotExist?: boolean,
 ): boolean {
   if (config.REMOTE_ENABLE) {
-    const remoteDir = path.join(config.REMOTE_PATH, scope, taskName);
+    const remoteDir = path.join(config.REMOTE_RCLONE_PATH, scope, taskName);
     const remotePath = path.join(remoteDir, fileName);
     // 读取远程目录查看是否存在
     let buf;
     try {
       buf = cp.execSync(
-        `rclone ls ${config.REMOTE_NAME}:${remoteDir}`,
+        `rclone ls ${config.REMOTE_RCLONE_NAME}:${remoteDir}`,
         getOptions(10000),
       );
     } catch (err: unknown) {
       console.log((err as ExecSyncError)?.output.toString());
       log(
-        `Error:Remote directory not exist:${config.REMOTE_NAME}:${remoteDir}`,
+        `Error:Remote directory not exist:${config.REMOTE_RCLONE_NAME}:${remoteDir}`,
       );
       return false;
     }
@@ -97,7 +97,7 @@ function deleteFromRemote(
       (ignoreNotExist == undefined || !ignoreNotExist)
     ) {
       log(
-        `Warning:Remote not exist file : ${config.REMOTE_NAME}:${remotePath} ,ignore`,
+        `Warning:Remote not exist file : ${config.REMOTE_RCLONE_NAME}:${remotePath} ,ignore`,
       );
       return true;
     }
@@ -106,7 +106,7 @@ function deleteFromRemote(
     try {
       log(`Info:Removing ${remotePath}`);
       cp.execSync(
-        `rclone delete "${config.REMOTE_NAME}:${remotePath}"`,
+        `rclone delete "${config.REMOTE_RCLONE_NAME}:${remotePath}"`,
         getOptions(10000),
       );
     } catch (err: unknown) {
