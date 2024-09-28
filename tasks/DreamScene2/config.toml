@@ -30,6 +30,7 @@ build_manifest = ["workflows/setup.toml", "${taskName}"]
 # build_cover = ""
 # build_delete = []
 main_program = false
+min_download_size = "128KB"
 
 # 爬虫模板临时参数
 # [scraper_temp]
