@@ -42,7 +42,7 @@ function uploadToRemote(
     try {
       log(`Info:Uploading ${fileName}`);
       cp.execSync(
-        `rclone copy "${localPath}" ${config.REMOTE_RCLONE_NAME}:${remotePath}`,
+        `rclone copy "${localPath}" ${config.REMOTE_RCLONE_NAME}:"${remotePath}"`,
         getOptions(3600000),
       );
     } catch (err: unknown) {
@@ -93,7 +93,7 @@ function deleteFromRemote(
     let buf;
     try {
       buf = cp.execSync(
-        `rclone ls ${config.REMOTE_RCLONE_NAME}:${remoteDir}`,
+        `rclone ls ${config.REMOTE_RCLONE_NAME}:"${remoteDir}"`,
         getOptions(10000),
       );
     } catch (err: unknown) {
@@ -119,7 +119,7 @@ function deleteFromRemote(
     try {
       log(`Info:Removing ${remotePath}`);
       cp.execSync(
-        `rclone delete "${config.REMOTE_RCLONE_NAME}:${remotePath}"`,
+        `rclone delete ${config.REMOTE_RCLONE_NAME}:"${remotePath}"`,
         getOptions(10000),
       );
     } catch (err: unknown) {

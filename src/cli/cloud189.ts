@@ -59,7 +59,7 @@ export function uploadToRemote(
         log(`Info:Uploading '${localPath}' to '${remotePath}'`);
         // 先尝试移除这个文件
         deleteFromRemote(fileName, scope, taskName, true);
-        cp.execSync(`cloud189 up "${localPath}" ${remotePath}`);
+        cp.execSync(`cloud189 up "${localPath}" "${remotePath}"`);
       } catch (err: unknown) {
         console.log((err as ExecSyncError)?.output.toString());
         date = new Date();
@@ -107,7 +107,7 @@ export function deleteFromRemote(
     // 读取远程目录查看是否存在
     let buf;
     try {
-      buf = cp.execSync(`cloud189 ls ${remoteDir}`);
+      buf = cp.execSync(`cloud189 ls "${remoteDir}"`);
     } catch (err: unknown) {
       console.log((err as ExecSyncError)?.output.toString());
       log(`Error:Remote directory not exist:cloud189:${remoteDir}`);
