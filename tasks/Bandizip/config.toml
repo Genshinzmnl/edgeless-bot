@@ -29,7 +29,7 @@ build_manifest = ["${taskName}.wcs", "${taskName}/${downloadedFile}"]
 # 爬虫模板临时参数
 [scraper_temp]
 version_page_url = "https://www.bandisoft.com/bandizip/history/"
-version_selector = "body > div.main_content > section > div > h2:nth-child(1)"
+version_selector = "body > div.main_content > section > div > div:nth-child(4) > div.cell1"
 download_selector = "#bandizip_main > div > a:nth-child(3)"
 
 # 自动制作模板要求的参数

@@ -15,14 +15,14 @@ producer = "Recursive_Unzip"
 # 使用到的正则
 [regex]
 # download_link = ''
-download_name = 'qbittorrent_enhanced_[0-9,.]{1,}_qt6_x64_setup\.exe'
+download_name = 'qbittorrent_enhanced_[0-9,.]{1,}_x64_setup\.exe'
 # scraper_version = ''
 
 # 通用参数
 [parameter]
 # resolver_cd = []
 # compress_level = 1
-build_manifest = ["${taskName}.wcs","${taskName}"]
+build_manifest = ["${taskName}.wcs", "${taskName}"]
 build_cover = "build-cover-dir"
 build_delete = ['$PLUGINSDIR']
 
@@ -33,7 +33,7 @@ build_delete = ['$PLUGINSDIR']
 [producer_required]
 shortcutName = "qBittorrent-Enhanced-Edition-qt6"
 sourceFile = "qbittorrent.exe"
-recursiveUnzipList = [ ]
+recursiveUnzipList = []
 
 
 # 额外备注
