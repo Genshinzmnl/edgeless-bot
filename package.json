@@ -60,11 +60,12 @@
     "*.ts": "eslint --fix"
   },
   "engines": {
-    "node": ">=16",
+    "node": ">=20",
     "pnpm": ">=9"
   },
   "resolutions": {
     "blake3-wasm": "^3.0.0",
     "@c4312/blake3-internal": "^3.0.0"
-  }
+  },
+  "packageManager": "pnpm@9.12.2"
 }

@@ -7,6 +7,12 @@ const regArray: Array<ResolverRegister> = [
     downloadLinkRegex: "https?://api.github.com/repos/[^/]+/[^/]+/releases",
     requiredKeys: [],
   },
+  {
+    name: "Lanzou",
+    entrance: "lanzou",
+    downloadLinkRegex: "lanzou\\w\\.com",
+    requiredKeys: [],
+  },
 ];
 
 export default regArray;
