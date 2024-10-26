@@ -391,6 +391,9 @@ export async function execute(
   const fileNames = [packerRes.val];
 
   // 生成可展开包的就绪目录
+  if (downloadUrl) {
+    t.info.downloadLink = downloadUrl;
+  }
   const expandReadyRes = await produceExpandableReady(t, p.val, {
     target,
     workshop,

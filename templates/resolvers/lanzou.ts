@@ -1,4 +1,4 @@
-import { ResolverParameters, ResolverReturned } from "../../src/class";
+import { ResolverParameters, ResolverReturned } from "../../src/types/class";
 import { Ok, Err, Result } from "ts-results";
 import { log } from "../../src/utils";
 import { loadShareUrl } from "lanzou-api";
