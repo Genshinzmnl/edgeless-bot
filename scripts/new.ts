@@ -394,7 +394,7 @@ async function registerTemplate(
   const newNode = `${JSON.stringify(node, null, 2)},\n];`;
   // 替换文本
   text = await prettier.format(text.replace("];", newNode), {
-    parser: "babel",
+    parser: "typescript",
   });
   // 写回
   fs.writeFileSync(filePath, text);
