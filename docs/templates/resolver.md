@@ -5,4 +5,5 @@
 ## 匹配 URL 解析器模板
 
 - [GitHub Release](./resolver/GitHub_Release.md)
+* [Lanzou](./resolver/lanzou.md)
 <!-- ${Resolver_URL} -->
