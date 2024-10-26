@@ -33,8 +33,8 @@ importers:
         specifier: ^4
         version: 4.1.3
       lanzou-api:
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.1.5
+        version: 0.1.5
       libaria2-ts:
         specifier: ^1.0.91
         version: 1.0.91
@@ -1193,8 +1193,8 @@ packages:
   json-stable-stringify-without-jsonify@1.0.1:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
 
-  lanzou-api@0.1.0:
-    resolution: {integrity: sha512-iWwpGx9fv9+sosX7VgCzuojfKYQIc0hRr2iORNRnFZ0MjfTaSBXeXOdcI3Yu9QJO9uKO6ULvvSE+4Sur61gDOg==}
+  lanzou-api@0.1.5:
+    resolution: {integrity: sha512-Gl14nhxyiaXxIH6jmKG211gxZqSu8Rdng84Dm8VzS+2OIoznD8wDGHQAlv7c+MW0OqyU9z8BihW6gm/vJLL8dw==}
     engines: {node: '>=18', pnpm: '>=9'}
 
   levn@0.4.1:
@@ -2907,7 +2907,7 @@ snapshots:
 
   json-stable-stringify-without-jsonify@1.0.1: {}
 
-  lanzou-api@0.1.0:
+  lanzou-api@0.1.5:
     dependencies:
       cheerio: 1.0.0
       relaxed-json: 1.0.3

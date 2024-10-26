@@ -7,7 +7,7 @@ export default async function (
   p: ResolverParameters,
 ): Promise<Result<ResolverReturned, string>> {
   const { downloadLink, password, cd, fileMatchRegex } = p;
-
+  log(`Info:Resolving download link: ${downloadLink}`);
   if (cd?.length) {
     log(
       `Warning:Resolver template 'Lanzou' doesn't support cd currently, ignoring cd array : '${JSON.stringify(
@@ -30,7 +30,9 @@ export default async function (
       directLink: data.downloadUrl,
     });
   } else {
-    log(`Info:Folder share found, matching with regex '${fileMatchRegex}'`);
+    log(
+      `Info:Matching file with regex '${fileMatchRegex}' in the share folder`,
+    );
     const { nodes } = data;
     const regex = new RegExp(fileMatchRegex);
     for (const { name_all, shareUrl } of nodes) {
