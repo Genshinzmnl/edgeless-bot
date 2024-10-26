@@ -8,6 +8,7 @@
     "cheerio": "^1.0.0-rc.10",
     "iconv-lite": "^0.6.3",
     "ini": "^4",
+    "lanzou-api": "^0.1.0",
     "libaria2-ts": "^1.0.91",
     "minimist": "^1.2.5",
     "ora": "8",
@@ -62,5 +63,5 @@
     "node": ">=18",
     "pnpm": ">=9"
   },
-  "packageManager": "pnpm@9.12.1"
+  "packageManager": "pnpm@9.12.2"
 }
